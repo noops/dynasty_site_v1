@@ -38,12 +38,12 @@ export default function BylawsPage() {
     return (
         <div className="space-y-10 pb-20">
             <header>
-                <h1 className="text-5xl font-outfit font-bold gradient-text pb-2">League Bylaws</h1>
-                <p className="text-muted-foreground text-lg">The constitution of our competition.</p>
+                <h1 className="text-4xl lg:text-5xl font-outfit font-bold gradient-text pb-2">League Bylaws</h1>
+                <p className="text-muted-foreground text-base lg:text-lg">The constitution of our competition.</p>
             </header>
 
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr,300px] gap-10">
-                <div className="glass p-10 rounded-3xl border border-white/5 prose prose-invert max-w-none prose-headings:font-outfit prose-h1:text-4xl prose-h2:text-2xl prose-h2:mt-10 prose-p:text-muted-foreground prose-li:text-muted-foreground">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr,300px] gap-8 lg:gap-10">
+                <div className="glass p-6 lg:p-10 rounded-3xl border border-white/5 prose prose-invert max-w-none prose-headings:font-outfit prose-h1:text-3xl lg:prose-h1:text-4xl prose-h2:text-xl lg:prose-h2:text-2xl prose-h2:mt-10 prose-p:text-muted-foreground prose-li:text-muted-foreground">
                     <ReactMarkdown>{BYLAWS_MD}</ReactMarkdown>
                 </div>
 

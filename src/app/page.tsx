@@ -12,11 +12,11 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-10 pb-20">
       <header>
-        <h1 className="text-5xl font-outfit font-bold gradient-text pb-2">{league.name}</h1>
-        <p className="text-muted-foreground text-lg">Season {league.season} &bull; {league.total_rosters} Teams &bull; {league.status.toUpperCase()}</p>
+        <h1 className="text-4xl lg:text-5xl font-outfit font-bold gradient-text pb-2">{league.name}</h1>
+        <p className="text-muted-foreground text-base lg:text-lg">Season {league.season} &bull; {league.total_rosters} Teams &bull; {league.status.toUpperCase()}</p>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
         <StatsCard
           title="Total Teams"
           value={league.total_rosters}

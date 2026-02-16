@@ -41,23 +41,23 @@ export default async function HistoryPage() {
     return (
         <div className="space-y-10">
             <header>
-                <h1 className="text-5xl font-outfit font-bold gradient-text pb-2">League History</h1>
-                <p className="text-muted-foreground text-lg">Walking back through time...</p>
+                <h1 className="text-4xl lg:text-5xl font-outfit font-bold gradient-text pb-2">League History</h1>
+                <p className="text-muted-foreground text-base lg:text-lg">Walking back through time...</p>
             </header>
 
-            <div className="relative border-l-2 border-primary/20 ml-4 pl-10 space-y-12 py-10">
-                {history.map((league, index) => (
+            <div className="relative border-l-2 border-primary/20 ml-3 lg:ml-4 pl-6 lg:pl-10 space-y-8 lg:space-y-12 py-10">
+                {history.map((league: any, index: number) => (
                     <div key={league.id} className="relative group">
-                        <div className="absolute -left-[51px] top-0 w-10 h-10 rounded-full bg-background border-4 border-primary flex items-center justify-center z-10">
-                            <Trophy className="w-5 h-5 text-primary" />
+                        <div className="absolute -left-[35px] lg:-left-[51px] top-0 w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-background border-4 border-primary flex items-center justify-center z-10">
+                            <Trophy className="w-4 h-4 lg:w-5 lg:h-5 text-primary" />
                         </div>
 
-                        <div className="glass p-8 rounded-3xl border border-white/5 hover:border-primary/20 transition-all duration-300">
-                            <div className="flex items-center gap-4 mb-4">
-                                <div className="px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold font-mono">
+                        <div className="glass p-6 lg:p-8 rounded-3xl border border-white/5 hover:border-primary/20 transition-all duration-300">
+                            <div className="flex flex-col lg:flex-row lg:items-center gap-4 mb-4 lg:mb-6">
+                                <div className="w-fit px-3 py-1 rounded-full bg-primary/20 text-primary text-[10px] lg:text-xs font-bold font-mono text-center">
                                     {league.year}
                                 </div>
-                                <h2 className="text-2xl font-outfit font-bold">{league.name}</h2>
+                                <h2 className="text-xl lg:text-2xl font-outfit font-bold">{league.name}</h2>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

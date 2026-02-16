@@ -58,12 +58,12 @@ export default function AnalyticsPage() {
     return (
         <div className="space-y-10">
             <header>
-                <h1 className="text-5xl font-outfit font-bold gradient-text pb-2">Trade Analytics</h1>
-                <p className="text-muted-foreground text-lg">Who is the biggest wheeler-dealer?</p>
+                <h1 className="text-4xl lg:text-5xl font-outfit font-bold gradient-text pb-2">Trade Analytics</h1>
+                <p className="text-muted-foreground text-base lg:text-lg">Who is the biggest wheeler-dealer?</p>
             </header>
 
-            <div className="glass p-8 rounded-3xl border border-white/5 h-[500px]">
-                <div className="flex items-center gap-3 mb-8">
+            <div className="glass p-6 lg:p-8 rounded-3xl border border-white/5 h-[400px] lg:h-[500px]">
+                <div className="flex items-center gap-3 mb-6 lg:mb-8">
                     <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center">
                         <TrendingUp className="w-6 h-6 text-primary" />
                     </div>
@@ -76,16 +76,16 @@ export default function AnalyticsPage() {
                         <XAxis
                             dataKey="name"
                             stroke="#666"
-                            fontSize={12}
+                            fontSize={10}
                             tickLine={false}
                             axisLine={false}
                             angle={-45}
                             textAnchor="end"
-                            height={80}
+                            height={70}
                         />
                         <YAxis
                             stroke="#666"
-                            fontSize={12}
+                            fontSize={10}
                             tickLine={false}
                             axisLine={false}
                             allowDecimals={false}
@@ -95,7 +95,8 @@ export default function AnalyticsPage() {
                                 backgroundColor: '#121212',
                                 border: '1px solid #333',
                                 borderRadius: '12px',
-                                color: '#fff'
+                                color: '#fff',
+                                fontSize: '12px'
                             }}
                         />
                         <Bar dataKey="trades" radius={[4, 4, 0, 0]}>
@@ -107,7 +108,7 @@ export default function AnalyticsPage() {
                 </ResponsiveContainer>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
                 <div className="glass p-6 rounded-2xl">
                     <p className="text-sm text-muted-foreground mb-1">Most Active</p>
                     <p className="text-2xl font-bold">{data[0]?.name}</p>

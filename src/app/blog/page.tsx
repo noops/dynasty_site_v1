@@ -38,11 +38,11 @@ export default function BlogPage() {
     return (
         <div className="space-y-10 pb-20">
             <header>
-                <h1 className="text-5xl font-outfit font-bold gradient-text pb-2">League Blog</h1>
-                <p className="text-muted-foreground text-lg">Insights, rants, and analysis from the managers.</p>
+                <h1 className="text-4xl lg:text-5xl font-outfit font-bold gradient-text pb-2">League Blog</h1>
+                <p className="text-muted-foreground text-base lg:text-lg">Insights, rants, and analysis from the managers.</p>
             </header>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 {BLOG_POSTS.map((post, index) => (
                     <motion.article
                         key={post.id}

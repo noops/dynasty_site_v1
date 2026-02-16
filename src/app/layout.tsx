@@ -18,11 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} ${outfit.variable} font-sans antialiased overflow-hidden`}>
-        <div className="flex h-screen w-screen bg-background">
+      <body className={`${inter.variable} ${outfit.variable} font-sans antialiased overflow-x-hidden`}>
+        <div className="flex min-h-screen w-full bg-background relative">
           <Sidebar />
-          <main className="flex-1 overflow-y-auto px-8 py-10">
-            <div className="max-w-7xl mx-auto h-full">
+          <main className="flex-1 min-w-0 px-4 sm:px-6 lg:px-8 py-20 lg:py-10">
+            <div className="max-w-7xl mx-auto">
               {children}
             </div>
           </main>
