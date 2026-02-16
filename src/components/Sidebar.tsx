@@ -8,6 +8,7 @@ import {
     FileText,
     ArrowLeftRight,
     UserPlus,
+    Users,
     BarChart3,
     Trophy,
     Menu,
@@ -19,6 +20,7 @@ import { useState, useEffect } from "react";
 
 const navItems = [
     { name: "Home", href: "/", icon: Home },
+    { name: "Team Overview", href: "/teams", icon: Users },
     { name: "Recap", href: "/recap", icon: History },
     { name: "Blog", href: "/blog", icon: FileText },
     { name: "Trades", href: "/trades", icon: ArrowLeftRight },
