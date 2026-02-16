@@ -1,40 +1,54 @@
 import ReactMarkdown from "react-markdown";
 import { FileText, ShieldAlert } from "lucide-react";
+import { getLeague } from "@/lib/sleeper";
 
-// In a real app, this might come from a file or CMS.
-const BYLAWS_MD = `
-# League Bylaws
+const LEAGUE_ID = "1203080446066307072";
+
+export default async function BylawsPage() {
+    const league = await getLeague(LEAGUE_ID);
+
+    const rosterCount: Record<string, number> = {};
+    league.roster_positions.forEach((pos: string) => {
+        rosterCount[pos] = (rosterCount[pos] || 0) + 1;
+    });
+
+    const rosterDisplay = Object.entries(rosterCount)
+        .filter(([pos]) => pos !== 'BN' && pos !== 'IR')
+        .map(([pos, count]) => `${count} ${pos}`)
+        .join(', ');
+
+    const BYLAWS_MD = `
+# League Bylaws: ${league.name}
 
 ## 1. League Overview
 This is a **Dynasty** league intended for long-term competition. Managers are expected to remain active year-round.
 
 ## 2. Roster Settings
-- **Total Rosters**: 12 Teams
-- **Active Roster**: 1 QB, 2 RB, 2 WR, 1 TE, 2 FLEX, 1 SUPERFLEX
-- **Bench**: 15 slots
-- **Taxi Squad**: 5 slots (Rookies only)
+- **Total Rosters**: ${league.total_rosters} Teams
+- **Active Roster**: ${rosterDisplay}
+- **Bench Slots**: ${league.settings.reserve_slots || 0} IR, ${league.settings.taxi_slots || 0} Taxi
+- **Position Limits**: Check league settings for specific position caps.
 
 ## 3. Scoring System
-- **PPR**: 1 point per reception.
-- **Passing**: 4 pts per TD, 1 pt per 25 yards.
-- **Rushing/Receiving**: 6 pts per TD, 1 pt per 10 yards.
+- **PPR**: ${league.scoring_settings.rec || 0} point(s) per reception.
+- **Passing**: ${league.scoring_settings.pass_td || 0} pts per TD.
+- **Rushing/Receiving**: Check full settings for yardage bonuses.
 
 ## 4. Trades & Transactions
-- **Trade Deadline**: Week 13.
-- **Trade Vetoes**: No league votes. Only Commissioner intervention in cases of clear collusion.
-- **FAAB**: $100 budget for the season.
+- **Trade Deadline**: Week ${league.settings.trade_deadline || 'None'}.
+- **Trade Vetoes**: Commissioner discretion only (anti-collusion).
+- **Waivers**: FAAB (Budget: $100).
 
 ## 5. Playoffs
-- **Teams**: Top 6 teams.
-- **Format**: Weeks 15-17.
-- **Tie-break**: Most points for.
+- **Teams**: ${league.settings.playoff_teams} Teams.
+- **Start Week**: Week ${league.settings.playoff_week_start}.
+- **Tie-break**: Most points for (Season).
 
-## 6. Drafts
-- **Rookie Draft**: 4 rounds every May.
-- **Order**: Reverse standings of non-playoff teams (Max PF), then playoff results.
+## 6. Rookie Draft
+- **Format**: Linear.
+- **Order**: Determined by Max PF for non-playoff teams.
 `;
 
-export default function BylawsPage() {
     return (
         <div className="space-y-10 pb-20">
             <header>
@@ -56,15 +70,15 @@ export default function BylawsPage() {
                         <ul className="space-y-4 text-sm">
                             <li className="flex justify-between border-b border-white/5 pb-2">
                                 <span className="text-muted-foreground">Trade Deadline</span>
-                                <span className="font-bold">Week 13</span>
+                                <span className="font-bold">Week {league.settings.trade_deadline}</span>
                             </li>
                             <li className="flex justify-between border-b border-white/5 pb-2">
-                                <span className="text-muted-foreground">FAAB Budget</span>
-                                <span className="font-bold">$100</span>
+                                <span className="text-muted-foreground">Playoff Teams</span>
+                                <span className="font-bold">{league.settings.playoff_teams}</span>
                             </li>
                             <li className="flex justify-between border-b border-white/5 pb-2">
-                                <span className="text-muted-foreground">Draft Date</span>
-                                <span className="font-bold">May 15</span>
+                                <span className="text-muted-foreground">Scoring Type</span>
+                                <span className="font-bold">{league.scoring_settings.rec === 1 ? "PPR" : "Standard"}</span>
                             </li>
                         </ul>
                     </div>
@@ -75,11 +89,11 @@ export default function BylawsPage() {
                             Resources
                         </h3>
                         <div className="space-y-2">
-                            <button className="w-full py-2 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-sm transition-colors text-left">
-                                Download PDF
+                            <button className="w-full py-2 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-sm transition-colors text-left uppercase font-bold tracking-tighter">
+                                Official Sleeper Link
                             </button>
-                            <button className="w-full py-2 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-sm transition-colors text-left">
-                                View Draft Board
+                            <button className="w-full py-2 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-sm transition-colors text-left uppercase font-bold tracking-tighter">
+                                View Trade Block
                             </button>
                         </div>
                     </div>

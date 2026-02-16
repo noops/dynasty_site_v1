@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-    LayoutDashboard,
+    Home,
     History,
     FileText,
     ArrowLeftRight,
+    UserPlus,
     BarChart3,
     Trophy,
     Menu,
@@ -17,11 +18,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
 const navItems = [
-    { name: "Dashboard", href: "/", icon: LayoutDashboard },
+    { name: "Home", href: "/", icon: Home },
     { name: "Recap", href: "/recap", icon: History },
     { name: "Blog", href: "/blog", icon: FileText },
     { name: "Trades", href: "/trades", icon: ArrowLeftRight },
     { name: "Trade Analytics", href: "/analytics", icon: BarChart3 },
+    { name: "Roster Moves", href: "/moves", icon: UserPlus },
     { name: "History", href: "/history", icon: Trophy },
     { name: "Bylaws", href: "/bylaws", icon: FileText },
 ];

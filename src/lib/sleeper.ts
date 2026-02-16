@@ -52,3 +52,17 @@ export async function getAllTrades(leagueId: string) {
 
     return allTransactions.flat().filter(t => t.type === 'trade');
 }
+
+export async function getAllMoves(leagueId: string) {
+    const weeks = Array.from({ length: 18 }, (_, i) => i + 1);
+    const allTransactions = await Promise.all(
+        weeks.map(week => getLeagueTransactions(leagueId, week))
+    );
+
+    return allTransactions.flat().filter(t => t.type === 'waiver' || t.type === 'free_agent');
+}
+
+export async function getTradedPicks(leagueId: string) {
+    const res = await fetch(`${SLEEPER_API_BASE}/league/${leagueId}/traded_picks`);
+    return res.json();
+}

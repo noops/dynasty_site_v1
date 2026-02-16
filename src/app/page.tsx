@@ -9,11 +9,30 @@ export default async function DashboardPage() {
   const rosters = await getLeagueRosters(LEAGUE_ID);
   const users = await getLeagueUsers(LEAGUE_ID);
 
+  const sortedRosters = [...rosters].sort((a: any, b: any) => {
+    if (b.settings.wins !== a.settings.wins) {
+      return b.settings.wins - a.settings.wins;
+    }
+    const fptsA = parseFloat(`${a.settings.fpts}.${a.settings.fpts_decimal || 0}`);
+    const fptsB = parseFloat(`${b.settings.fpts}.${b.settings.fpts_decimal || 0}`);
+    return fptsB - fptsA;
+  });
+
+  const statusMap: Record<string, string> = {
+    'pre_draft': 'Offseason',
+    'drafting': 'Draft Live',
+    'in_season': 'Regular Season',
+    'post_season': 'Playoffs',
+    'complete': 'Season Complete',
+  };
+
+  const displayStatus = statusMap[league.status] || league.status.toUpperCase();
+
   return (
     <div className="space-y-10 pb-20">
       <header>
         <h1 className="text-4xl lg:text-5xl font-outfit font-bold gradient-text pb-2">{league.name}</h1>
-        <p className="text-muted-foreground text-base lg:text-lg">Season {league.season} &bull; {league.total_rosters} Teams &bull; {league.status.toUpperCase()}</p>
+        <p className="text-muted-foreground text-base lg:text-lg">Season {league.season} &bull; {league.total_rosters} Teams &bull; {displayStatus.toUpperCase()}</p>
       </header>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
@@ -25,7 +44,7 @@ export default async function DashboardPage() {
         />
         <StatsCard
           title="League Status"
-          value={league.status}
+          value={displayStatus}
           icon={Calendar}
           color="purple"
         />
@@ -46,12 +65,13 @@ export default async function DashboardPage() {
       <section>
         <h2 className="text-2xl font-outfit font-bold mb-6">Manager Standings</h2>
         <div className="grid grid-cols-1 gap-4">
-          {rosters.map((roster: any) => {
+          {sortedRosters.map((roster: any, index: number) => {
             const user = users.find((u: any) => u.user_id === roster.owner_id);
             return (
-              <div key={roster.roster_id} className="glass p-4 rounded-2xl flex items-center justify-between hover:border-primary/50 transition-colors">
+              <div key={roster.roster_id} className="glass p-4 rounded-2xl flex items-center justify-between hover:border-primary/50 transition-colors group">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center overflow-hidden border border-white/10">
+                  <div className="text-sm font-mono text-muted-foreground w-4">{index + 1}</div>
+                  <div className="w-12 h-12 rounded-full bg-secondary/50 flex items-center justify-center overflow-hidden border border-white/10 group-hover:border-primary/50 transition-colors">
                     {user?.avatar ? (
                       <img src={`https://sleepercdn.com/avatars/thumbs/${user.avatar}`} alt={user?.display_name || "Owner"} />
                     ) : (
@@ -64,8 +84,8 @@ export default async function DashboardPage() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-medium text-primary">Points For</p>
-                  <p className="text-xl font-bold">{roster.settings.fpts}.{roster.settings.fpts_decimal}</p>
+                  <p className="text-sm font-medium text-primary uppercase tracking-tighter">Points For</p>
+                  <p className="text-xl font-bold">{roster.settings.fpts}.{roster.settings.fpts_decimal || 0}</p>
                 </div>
               </div>
             );
