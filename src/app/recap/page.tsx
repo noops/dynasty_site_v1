@@ -480,7 +480,7 @@ export default function RecapPage() {
                                 <div className="glass p-6 lg:p-10 rounded-3xl border border-white/5 lg:col-span-2 bg-gradient-to-br from-primary/5 to-transparent">
                                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
                                         <div>
-                                            <h2 className="text-2xl lg:text-3xl font-outfit font-bold mb-2">2026 Offseason Hub</h2>
+                                            <h2 className="text-2xl lg:text-3xl font-outfit font-bold mb-2 uppercase tracking-tight">2026 Shmantasy Shmootball Hub</h2>
                                             <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
                                                 Analyzing roster shifts, draft capital, and market trends as we head toward the 2026 Rookie Draft.
                                             </p>

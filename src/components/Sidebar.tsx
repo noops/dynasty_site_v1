@@ -12,7 +12,9 @@ import {
     BarChart3,
     Trophy,
     Menu,
-    X
+    X,
+    ExternalLink,
+    Newspaper
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -22,7 +24,7 @@ const navItems = [
     { name: "Home", href: "/", icon: Home },
     { name: "Team Overview", href: "/teams", icon: Users },
     { name: "Recap", href: "/recap", icon: History },
-    { name: "Blog", href: "/blog", icon: FileText },
+    { name: "News", href: "/news", icon: Newspaper },
     { name: "Trades", href: "/trades", icon: ArrowLeftRight },
     { name: "Trade Analytics", href: "/analytics", icon: BarChart3 },
     { name: "Roster Moves", href: "/moves", icon: UserPlus },
@@ -47,7 +49,7 @@ export default function Sidebar() {
                     <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
                         <Trophy className="text-white w-5 h-5" />
                     </div>
-                    <span className="font-outfit font-bold text-lg tracking-tight">DYNASTY</span>
+                    <span className="font-outfit font-bold text-lg tracking-tight uppercase">Shmantasy Shmootball</span>
                 </div>
                 <button
                     onClick={() => setIsOpen(!isOpen)}
@@ -80,7 +82,7 @@ export default function Sidebar() {
                         <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
                             <Trophy className="text-white w-5 h-5" />
                         </div>
-                        <span className="font-outfit font-bold text-xl tracking-tight">DYNASTY</span>
+                        <span className="font-outfit font-bold text-xl tracking-tight leading-tight uppercase">Shmantasy<br />Shmootball</span>
                     </div>
 
                     <nav className="space-y-1.5 mt-16 lg:mt-0">
@@ -117,6 +119,15 @@ export default function Sidebar() {
                         <p className="text-[10px] text-primary font-bold uppercase tracking-wider mb-1">League ID</p>
                         <p className="text-xs font-mono truncate opacity-60">1203080446066307072</p>
                     </div>
+                    <a
+                        href="https://noops.work"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between px-4 py-3 rounded-xl bg-white/5 text-muted-foreground hover:text-primary transition-colors text-[10px] uppercase tracking-widest font-bold border border-transparent hover:border-primary/20 group"
+                    >
+                        <span>Powered by noops.work</span>
+                        <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </a>
                     <button
                         onClick={() => setIsOpen(false)}
                         className="lg:hidden w-full py-3 rounded-xl bg-white/5 text-sm font-bold"

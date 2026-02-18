@@ -21,7 +21,7 @@ export default async function BylawsPage() {
 # League Bylaws: ${league.name}
 
 ## 1. League Overview
-This is a **Dynasty** league intended for long-term competition. Managers are expected to remain active year-round.
+This is a **Shmantasy Shmootball** league intended for long-term competition. Managers are expected to remain active year-round.
 
 ## 2. Roster Settings
 - **Total Rosters**: ${league.total_rosters} Teams

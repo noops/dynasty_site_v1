@@ -8,8 +8,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
-  title: "Dynasty Dashboard | Sleeper League",
-  description: "Advanced analytics and history for your Sleeper Dynasty League",
+  title: "Shmantasy Shmootball",
+  description: "Advanced analytics and history for your Sleeper Shmantasy Shmootball League",
 };
 
 export default function RootLayout({
