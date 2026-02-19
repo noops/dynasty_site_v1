@@ -8,13 +8,16 @@ export async function GET(request: Request) {
     const limit = searchParams.get('limit') || '5';
 
     try {
+        // Using old.reddit.com and mobile headers often bypasses strict cloud blocks
         const response = await fetch(
-            `https://www.reddit.com/r/${sub}/top.json?limit=${limit}&t=${t}`,
+            `https://old.reddit.com/r/${sub}/top.json?limit=${limit}&t=${t}`,
             {
                 headers: {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
-                    'Accept': 'application/json',
+                    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1',
+                    'Accept': 'application/json, text/plain, */*',
                     'Accept-Language': 'en-US,en;q=0.9',
+                    'Referer': 'https://www.google.com/',
+                    'Origin': 'https://www.reddit.com',
                     'Cache-Control': 'no-cache',
                     'Pragma': 'no-cache'
                 },
