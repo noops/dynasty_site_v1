@@ -32,10 +32,11 @@ export default function NewsPage() {
             setError(null);
             try {
                 const res = await fetch(`/api/news?sub=${selectedSub}&t=${timeFilter}&limit=5`);
-                if (!res.ok) {
-                    throw new Error(`Failed to fetch: ${res.status} ${res.statusText}`);
-                }
                 const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.error || `Server Error: ${res.status}`);
+                }
 
                 if (data.error) {
                     throw new Error(`${data.error}: ${data.details || ''}`);
