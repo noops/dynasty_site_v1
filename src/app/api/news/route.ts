@@ -6,6 +6,8 @@ export async function GET(request: Request) {
     const t = searchParams.get('t') || 'day';
     const limit = searchParams.get('limit') || '5';
 
+    console.log(`[News API] Fetching r/${sub} | filter: ${t} | limit: ${limit}`);
+
     try {
         const response = await fetch(
             `https://www.reddit.com/r/${sub}/top.json?limit=${limit}&t=${t}`,
@@ -16,6 +18,8 @@ export async function GET(request: Request) {
                 }
             }
         );
+
+        console.log(`[News API] Reddit response: ${response.status} ${response.statusText}`);
 
         if (!response.ok) {
             throw new Error(`Reddit API responded with ${response.status}`);

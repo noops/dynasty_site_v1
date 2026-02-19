@@ -44,19 +44,20 @@ export default function NewsPage() {
 
                 const formattedPosts = data.data.children.map((child: any) => {
                     const post = child.data;
+                    if (!post) return null;
                     return {
-                        id: post.id,
-                        title: post.title,
-                        url: `https://reddit.com${post.permalink}`,
-                        author: post.author,
-                        ups: post.ups,
-                        num_comments: post.num_comments,
-                        thumbnail: post.thumbnail && post.thumbnail.startsWith('http') ? post.thumbnail : null,
-                        created_utc: post.created_utc,
-                        subreddit: post.subreddit,
-                        selftext: post.selftext
+                        id: post.id || Math.random().toString(),
+                        title: post.title || "No Title",
+                        url: post.permalink ? `https://reddit.com${post.permalink}` : post.url || "#",
+                        author: post.author || "anonymous",
+                        ups: typeof post.ups === 'number' ? post.ups : 0,
+                        num_comments: typeof post.num_comments === 'number' ? post.num_comments : 0,
+                        thumbnail: (typeof post.thumbnail === 'string' && post.thumbnail.startsWith('http')) ? post.thumbnail : null,
+                        created_utc: post.created_utc || Date.now() / 1000,
+                        subreddit: post.subreddit || selectedSub,
+                        selftext: post.selftext || ""
                     };
-                });
+                }).filter(Boolean);
 
                 setPosts(formattedPosts);
             } catch (err: any) {
