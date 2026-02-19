@@ -37,6 +37,10 @@ export default function NewsPage() {
                 }
                 const data = await res.json();
 
+                if (data.error) {
+                    throw new Error(`${data.error}: ${data.details || ''}`);
+                }
+
                 if (!data?.data?.children) {
                     console.error("Unexpected Reddit API response:", data);
                     throw new Error("Invalid response structure from Reddit");
